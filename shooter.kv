@@ -1,0 +1,159 @@
+#:set color_cosmos 0.2,0,0.1,1
+#:set color_button 0.2,0,0.1,1
+
+<MainScreen>:
+   MDBoxLayout:
+      orientation: 'vertical'
+      padding: '50dp'
+      spacing: '30dp'
+
+      MDIconButton:
+         icon: "cog"
+         pos_hint: {"right": 1, "top": 1}
+         icon_size: '50dp'
+
+      MDLabel:
+         text: "SHOOTER"
+         halign: 'center'
+         font_size: '60sp'
+
+      Image:
+         source: 'assets/images/ruketa2.webp'
+         size_hint_y: 0.5
+         allow_stretch: True
+
+      MDRectangleFlatButton:
+         text: "PLAY"
+         font_size: '60sp'
+         pos_hint: {'center_x': 0.5,'center_y': 0.5}
+         # theme_text_color: "Custom"
+         # text_color: "white"
+         # line_color: "red"
+         on_press:
+            root.manager.current = 'game'
+
+<Ship>:
+   size_hint: (None,None)
+
+<PlayerShip@Ship>:
+   source: 'assets/images/ruketa2.webp'
+   size_hint: None, None
+   size: dp(35), dp(150)      
+   
+
+<EnemyShip@Ship>:
+   source: 'assets/images/enemy.png'
+   size_hint: None, None
+   size: dp(50), dp(50)    
+
+
+
+<GameScreen>:
+   MDFloatLayout:
+      md_bg_color: color_cosmos
+      FitImage:
+         source: 'assets/images/roket.png'
+         size: self.parent.size
+         pos: self.parent.pos
+
+      MDFloatLayout:
+         id: game
+
+         MDFloatLayout:
+            id: back
+
+         MDFloatLayout:
+            id: front
+
+            PlayerShip:
+               id: ship
+               center_x: root.center_x
+               center_y: root.center_y - dp(150)
+
+      MDFloatLayout:
+         id: interface
+         MDBoxLayout:
+            spacing: dp(20)
+            padding: dp(20)
+            pos_hint: {"top":1}
+            size_hint_y: None 
+            height: dp(50)
+
+            MDIcon:
+               icon: 'heart'
+               font_size:  '60sp'
+               size_hint: (None, None)
+               pos_hint: {"top":1}
+               color: 1,0,0,1
+            MDProgressBar:
+               id: hp_status
+               value: (ship.hp/ship.max_hp) * 100
+               height: dp(50)
+               size_hint_y: None
+               pos_hint: {"top":1} 
+               color: app.theme_cls.accent_color 
+                  
+            MDFloatingActionButton:
+               icon: "pause"
+               pos_hint: {'top': 1}
+               on_press: root.show_menu()
+
+         MDBoxLayout:
+            spacing: dp(20)
+            padding: dp(20)
+
+            MDFloatingActionButton:
+               icon: "arrow-left-drop-circle"
+               md_bg_color: color_button
+               on_press: root.pressKey('left')
+               on_release: root.releaseKey('left')
+
+            MDFloatingActionButton:
+               icon: "arrow-right-drop-circle"
+               on_press: root.pressKey('right')
+               on_release: root.releaseKey('right')
+
+            Widget:
+            MDFloatingActionButton:
+               icon: "arrow-up-drop-circle"
+               on_press: root.pressKey('shot')
+               on_release: root.releaseKey('shot')
+
+<Shot>:
+   size_hint: None, None
+   size: dp(100), dp(100)
+   source: 'assets/images/ship.png'
+   Image:
+      source: root.source_image
+      size: self.parent.size
+      pos: self.parent.pos
+      allow_stretch: True
+
+<GameOverScreen>:
+   MDBoxLayout:
+      orientation: 'vertical'
+      padding: '50dp'
+      spacing: '30dp'
+
+      MDLabel:
+         text: "GAME OVER"
+         font_size: '100sp'
+         color: app.theme_cls.accent_color
+         halign: 'center'
+
+      MDIcon:
+         icon: "skull"
+         font_size: '220sp'
+         size_hint: None, None
+         pos_hint: {'center_x': 0.5}
+         color: app.theme_cls.accent_color
+
+      Widget:
+         size_hint_y: 0.5
+
+      MDRectangleFlatButton:
+         text: "MENU"
+         font_size: '60sp'
+         pos_hint: {'center_x': 0.5}
+         on_press:
+            root.manager.current = 'main'
