@@ -113,7 +113,7 @@ class PlayerShip(Ship):
 
     def on_kv_post(self,base_widget):
         super().on_kv_post(base_widget)
-        self.images.extend(["assets/images/ruketa2.webp","assets/images/roketa1.png","assets/images/ruketa.webp"])
+        self.images.extend(["assets/images/roketa.png","assets/images/roketa1.png","assets/images/roketa2.png"])
     
     def update(self, keys, dt):
         super().update(dt)
@@ -181,8 +181,8 @@ class GameScreen(MDScreen):
         self.ship.game_screen = self
         self.spawn_delay = SPAWN_ENEMY_TIME
         self.time_last_spawn = 0
-        self.backBack = MoveBackground(source="assets/images/photo_2026-04-27_21-13-45.jpg", speed=0.2)
-        self.backFront = MoveBackground(source="assets/images/photo_2026-04-27_21-05-43.jpg", speed=1, scale=3)
+        self.backBack = MoveBackground(source="assets/images/img.png", speed=0.2)
+        self.backFront = MoveBackground(source="assets/images/photo.png", speed=1, scale=3)
         self.ids.back.add_widget(self.backBack)
         self.ids.back.add_widget(self.backFront)
         

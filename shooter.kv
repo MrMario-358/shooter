@@ -2,51 +2,50 @@
 #:set color_button 0.2,0,0.1,1
 
 <MainScreen>:
-   MDBoxLayout:
-      orientation: 'vertical'
-      padding: '50dp'
-      spacing: '30dp'
+   MDFloatLayout:
 
-      MDIconButton:
-         icon: "cog"
-         pos_hint: {"right": 1, "top": 1}
-         icon_size: '50dp'
+      FitImage:
+         source: 'assets/images/background_4.jpg'
+         size: self.parent.size
+         pos: self.parent.pos
 
-      MDLabel:
-         text: "SHOOTER"
-         halign: 'center'
-         font_size: '60sp'
+      MDBoxLayout:
+         orientation: 'vertical'
+         padding: '50dp'
+         spacing: '30dp'
 
-      Image:
-         source: 'assets/images/ruketa2.webp'
-         size_hint_y: 0.5
-         allow_stretch: True
+         MDLabel:
+            text: "SHOOTER"
+            halign: 'center'
+            font_size: '60sp'
 
-      MDRectangleFlatButton:
-         text: "PLAY"
-         font_size: '60sp'
-         pos_hint: {'center_x': 0.5,'center_y': 0.5}
-         # theme_text_color: "Custom"
-         # text_color: "white"
-         # line_color: "red"
-         on_press:
-            root.manager.current = 'game'
+         Image:
+            source: 'assets/images/roketa1.png'
+            size_hint_y: 0.5
+            allow_stretch: True
+
+         MDRectangleFlatButton:
+            text: "PLAY"
+            font_size: '60sp'
+            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+            # theme_text_color: "Custom"
+            # text_color: "white"
+            # line_color: "red"
+            on_press:
+               root.manager.current = 'game'
 
 <Ship>:
    size_hint: (None,None)
 
 <PlayerShip@Ship>:
-   source: 'assets/images/ruketa2.webp'
+   source: 'assets/images/roketa.png'
    size_hint: None, None
-   size: dp(35), dp(150)      
-   
+   size: dp(35), dp(150)
 
 <EnemyShip@Ship>:
    source: 'assets/images/enemy.png'
    size_hint: None, None
-   size: dp(50), dp(50)    
-
-
+   size: dp(50), dp(50)
 
 <GameScreen>:
    MDFloatLayout:
@@ -76,7 +75,7 @@
             spacing: dp(20)
             padding: dp(20)
             pos_hint: {"top":1}
-            size_hint_y: None 
+            size_hint_y: None
             height: dp(50)
 
             MDIcon:
@@ -90,9 +89,8 @@
                value: (ship.hp/ship.max_hp) * 100
                height: dp(50)
                size_hint_y: None
-               pos_hint: {"top":1} 
-               color: app.theme_cls.accent_color 
-                  
+               pos_hint: {"top":1}
+               color: app.theme_cls.accent_color
             MDFloatingActionButton:
                icon: "pause"
                pos_hint: {'top': 1}
